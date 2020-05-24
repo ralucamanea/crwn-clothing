@@ -4,8 +4,10 @@ import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/logo.svg'
 import { auth } from '../../firebase/firebase.utils';
 import { connect } from 'react-redux';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
-const Header = ({ currentUser }) => (
+const Header = ({ currentUser, hidden }) => (
     <div className='header'>
         <Link className='logo-container' to="/">
             <Logo className='logo'></Logo>
@@ -23,23 +25,24 @@ const Header = ({ currentUser }) => (
                 </div>
                 :
                 <div>
-
                     <Link className='option' to='/signin'>
                         SIGN IN
                     </Link>
                 </div>
             }
-
-            <Link className='option' to='/shop'>
-                CART
-    </Link>
+            <CartIcon></CartIcon>
         </div>
+        {hidden ?
+            null :
+            <CartDropdown />
+        }
     </div>
 )
 
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser //state.user from rootreducer .currentUser from userreducer. 
+const mapStateToProps = ({ user: { currentUser }, cart: { hidden } }) => ({
+    currentUser, //state.user from rootreducer .currentUser from userreducer. 
     //This will be the props to <Header> from above, without sending it from the parent component(App)
+    hidden
 })
 
 export default connect(mapStateToProps)(Header);
