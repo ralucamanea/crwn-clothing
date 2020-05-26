@@ -9,6 +9,9 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 //if you use switch (if matches, renders that one, nothing else), does not use exact and vice versa
 import { connect } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.actions';
+import { selectCurrentUser } from './redux/user/user.selectors';
+import { createStructuredSelector } from 'reselect';
+import CheckoutPage from './pages/checkout/checkout.component';
 
 class App extends React.Component {
   unsubscribeFromAuth = null;
@@ -44,15 +47,17 @@ class App extends React.Component {
           <Route exact path='/' component={HomePage}></Route>
           <Route exact path='/shop' component={ShopPage}></Route>
           {/* if we are already signed in, do not allow to access sign in again */}
-          <Route exact path='/signin' render={()=>this.props.currentUser ? (<Redirect to='/'></Redirect>) : (<SignInAndSignUpPage></SignInAndSignUpPage>)}></Route>
-        </Switch>
+          <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to='/'></Redirect>) : (<SignInAndSignUpPage></SignInAndSignUpPage>)}></Route>
+          <Route exact path='/checkout' component={CheckoutPage}></Route>
+
+</Switch>
       </div >
     );
   }
 }
 
-const mapStateToProps = ({ user }) => ({
-  currentUser: user.currentUser
+const mapStateToProps = createStructuredSelector({
+  currentUser: selectCurrentUser
 })
 
 const mapDispatchToProps = dispatch => ({
