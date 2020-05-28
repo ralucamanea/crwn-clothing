@@ -45,9 +45,9 @@ class App extends React.Component {
         <Header></Header>
         <Switch>
           <Route exact path='/' component={HomePage}></Route>
-          <Route exact path='/shop' component={ShopPage}></Route>
+          <Route path='/shop' component={ShopPage}></Route>
           {/* if we are already signed in, do not allow to access sign in again */}
-          <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to='/'></Redirect>) : (<SignInAndSignUpPage></SignInAndSignUpPage>)}></Route>
+          <Route path='/signin' render={() => this.props.currentUser ? (<Redirect to='/'></Redirect>) : (<SignInAndSignUpPage></SignInAndSignUpPage>)}></Route>
           <Route exact path='/checkout' component={CheckoutPage}></Route>
 
 </Switch>
