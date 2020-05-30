@@ -23,5 +23,5 @@ export const selectCollectionsForPreview = createSelector(
 export const selectCollection = collectionUrlParam =>
     createSelector(
         [selectCollections],
-        collections => collections[collectionUrlParam]
+        collections => collections.find(col=> col.id === COL_ID_MAP[collectionUrlParam])
     );
