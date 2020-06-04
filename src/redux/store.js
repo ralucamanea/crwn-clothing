@@ -2,8 +2,9 @@ import { createStore, applyMiddleware } from 'redux';
 import logger from 'redux-logger';
 import rootReducer from './root-reducer';
 import { persistStore } from 'redux-persist';
+import thunk from 'redux-thunk';
 
-const middlewares = [];
+const middlewares = [thunk];
 
 //disable the redux logs for production
 if (process.env.NODE_ENV === 'development') {
