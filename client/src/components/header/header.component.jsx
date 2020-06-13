@@ -1,5 +1,4 @@
 import React from 'react';
-import './header.styles.scss';
 import { ReactComponent as Logo } from '../../assets/logo.svg'
 import { connect } from 'react-redux';
 import CartIcon from '../cart-icon/cart-icon.component';
@@ -13,7 +12,7 @@ import { signOutStart } from '../../redux/user/user.actions';
 const Header = ({ currentUser, hidden, signOutStart }) => (
     <HeaderContainer>
         <LogoContainer to="/">
-            <Logo className='logo'></Logo>
+            <Logo></Logo>
         </LogoContainer>
         <OptionsContainer>
             <OptionLink to='/shop'>
